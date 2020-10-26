@@ -1,0 +1,16 @@
+514e829b8b847b846d11884b0ece7bc8 *DESCRIPTION
+4fb1978563b02bcb9d72bbe7ebbe93f9 *NAMESPACE
+2ccdf27974fde9719eb7c3bb9c703d33 *NEWS.md
+14b16d7a4d9211b7af0c0864e7bace73 *R/TunerHyperband.R
+447db0131589cf6189e430f1d8ad8579 *R/bibentries.R
+8efcf66db2f46dd831d07ef12411a817 *R/nds_selection.R
+83396ece3374b3a18f619078516f9987 *R/zzz.R
+bfcd4b597183d3c0b03407d164fb541e *man/mlr3hyperband-package.Rd
+2cf837b3e41ad65b26a0c94332f36454 *man/mlr_tuners_hyperband.Rd
+6188e4b40f2612651bb7ed5427588b30 *man/nds_selection.Rd
+884ef3060336465ee903cb48a9e4b211 *tests/testthat.R
+72b92b880452f65d48e99212b1e6a393 *tests/testthat/helper.R
+11107059585b8c82d8f689af2197d3b1 *tests/testthat/setup.R
+105126390a15c454f7604b737326aa51 *tests/testthat/teardown.R
+71b6e0b9f9469f0686d2f84fe2dff210 *tests/testthat/test_TunerHyperband.R
+9ab8654cea2a6e34e5dac20baa391072 *tests/testthat/test_nds_selection.R
