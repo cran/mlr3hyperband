@@ -1,6 +1,6 @@
 Package: mlr3hyperband
 Title: Hyperband for 'mlr3'
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     c(person(given = "Marc",
              family = "Becker",
@@ -45,7 +45,7 @@ Encoding: UTF-8
 NeedsCompilation: no
 RoxygenNote: 7.1.1
 Collate: 'TunerHyperband.R' 'nds_selection.R' 'bibentries.R' 'zzz.R'
-Packaged: 2020-10-19 12:30:28 UTC; marc
+Packaged: 2020-12-07 12:25:11 UTC; marc
 Author: Marc Becker [aut, cre] (<https://orcid.org/0000-0002-8115-0400>),
   Sebastian Gruber [aut] (<https://orcid.org/0000-0002-8544-3470>),
   Jakob Richter [aut] (<https://orcid.org/0000-0003-4481-5554>),
@@ -53,4 +53,4 @@ Author: Marc Becker [aut, cre] (<https://orcid.org/0000-0002-8115-0400>),
   Bernd Bischl [aut] (<https://orcid.org/0000-0001-6002-6980>)
 Maintainer: Marc Becker <marcbecker@posteo.de>
 Repository: CRAN
-Date/Publication: 2020-10-26 10:40:03 UTC
+Date/Publication: 2020-12-07 12:50:03 UTC

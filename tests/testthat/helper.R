@@ -72,13 +72,13 @@ test_tuner_hyperband = function(eta, n_dim = 1L, term_evals = NULL, lower_b,
   }
 
   if (length(measures) == 1) {
-    inst = TuningInstanceSingleCrit$new(
-      task, learner, rsmp("holdout"),
-      msr(measures), ps, term)
+    inst = TuningInstanceSingleCrit$new(task = task, learner = learner,
+      resampling =  rsmp("holdout"), measure = msr(measures), terminator = term,
+      search_space = ps)
   } else {
-    inst = TuningInstanceMultiCrit$new(
-      task, learner, rsmp("holdout"),
-      lapply(measures, msr), ps, term)
+    inst = TuningInstanceMultiCrit$new(task = task, learner = learner,
+      resampling = rsmp("holdout"), measures = lapply(measures, msr),
+      terminator = term, search_space = ps)
   }
 
   tuner = tnr("hyperband", eta = eta)
