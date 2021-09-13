@@ -9,6 +9,7 @@ library(R6)
 lapply(list.files(system.file("testthat", package = "mlr3"), pattern = "^helper.*\\.[rR]$", full.names = TRUE), source)
 lapply(list.files(system.file("testthat", package = "mlr3tuning"), pattern = "^helper.*\\.[rR]$", full.names = TRUE), source)
 # nolint end
+
 test_tuner_hyperband = function(eta, n_dim = 1L, term_evals = NULL, lower_budget, upper_budget, measures = "classif.ce", 
   learner = lrn("classif.xgboost"), task = tsk("pima"), search_space = NULL) {
 
@@ -35,10 +36,10 @@ test_tuner_hyperband = function(eta, n_dim = 1L, term_evals = NULL, lower_budget
 
   if (length(measures) == 1) {
     instance = TuningInstanceSingleCrit$new(task = task, learner = learner, resampling =  rsmp("holdout"), 
-      measure = msr(measures), terminator = terminator, search_space = search_space)
+      measure = msr(measures), terminator = terminator, search_space = search_space, store_models = TRUE)
   } else {
     instance = TuningInstanceMultiCrit$new(task = task, learner = learner, resampling = rsmp("holdout"), 
-      measures = lapply(measures, msr), terminator = terminator, search_space = search_space)
+      measures = lapply(measures, msr), terminator = terminator, search_space = search_space, store_models = TRUE)
   }
 
   tuner = tnr("hyperband", eta = eta)
@@ -103,10 +104,42 @@ expect_hyperband_brackets = function(eta, lower_budget, upper_budget, archive) {
   expect_data_table(archive$data, nrows = real_evals)
 }
 
-# test hyperband tuner with depedencies in parameters
-test_tuner_hyperband_dependencies = function(eta, term_evals = NULL, lower_budget, upper_budget) {
-  ll = LearnerRegrDepParams$new()
-  ll$param_set$add(ParamInt$new("nrounds", lower = lower_budget, upper = upper_budget, tags = "budget"))
-  test_tuner_hyperband(eta = eta, term_evals = term_evals, lower_budget = lower_budget, upper_budget = upper_budget, 
-    measures = "regr.mse", learner = ll, task = tsk("boston_housing"), search_space = ll$param_set)
+test_tuner_successive_halving = function(n, eta, sampler = NULL, n_dim = 1L,
+  lower_bound = 1, upper_bound = 16, task = tsk("pima"),
+  learner = lrn("classif.xgboost"), resampling = rsmp("holdout"),
+  measures = msr("classif.ce"), search_space = NULL, terminator = trm("none"),
+  store_models = TRUE) {
+
+  if(is.null(search_space)) {
+    if(n_dim == 1) {
+      search_space = ParamSet$new(params = list(
+        ParamInt$new("nrounds", lower = lower_bound, upper = upper_bound, tags = "budget"),
+        ParamInt$new("max_depth", lower = 1, upper = 100)
+      ))
+    } else if (n_dim == 2) {
+      search_space = ParamSet$new(params = list(
+        ParamInt$new("nrounds", lower = lower_bound, upper = upper_bound, tags = "budget"),
+        ParamDbl$new("eta", lower = 0, upper = 1),
+        ParamInt$new("max_depth", lower = 1, upper = 100)
+      ))
+    }
+  }
+
+  if (length(measures) == 1) {
+    instance = TuningInstanceSingleCrit$new(task, learner, resampling, measures, terminator, search_space, 
+      store_models = store_models, check_values = TRUE)
+  } else {
+    instance = TuningInstanceMultiCrit$new(task, learner, resampling, measures, terminator, search_space, 
+      store_models = store_models, check_values = TRUE)
+  }
+
+  tuner = tnr("successive_halving", n = n, eta = eta, sampler = sampler)
+  expect_tuner(tuner)
+
+  tuner$optimize(instance)
+  archive = instance$archive$data
+
+  budget = archive[, search_space$ids(tags = "budget"), with = FALSE]
+  expect_lte(max(budget), upper_bound)
+  expect_gte(min(budget), lower_bound)
 }

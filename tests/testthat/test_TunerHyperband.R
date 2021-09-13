@@ -5,7 +5,6 @@ test_that("TunerHyperband works with TuningInstanceSingleCrit", {
 
   test_tuner_hyperband(eta = 3L, lower_budget = 1, upper_budget = 27)
   test_tuner_hyperband(eta = 2L, lower_budget = 1, upper_budget = 8, term_evals = 10, n_dim = 2L)
-  test_tuner_hyperband_dependencies(eta = 3L, lower_budget = 1, upper_budget = 27)
 })
 
 test_that("TunerHyperband works with TuningInstanceMultiCrit", {
@@ -23,7 +22,7 @@ test_that("TunerHyperband works with subsampling", {
 
   # define Graph Learner from rpart with subsampling as preprocessing step
   pops = po("subsample")
-  graph_learner = pops %>>% lrn("classif.rpart")
+  graph_learner = as_learner(pops %>>% lrn("classif.rpart"))
 
   # define with extended hyperparameters with subsampling fraction as budget
   # ==> no learner budget is required
@@ -108,9 +107,7 @@ test_that("TunerHyperband throws an error if budget parameter is invalid", {
     search_space = search_space)
 
   tuner = tnr("hyperband", eta = 2L)
-  expect_error(tuner$optimize(instance), 
-    regexp = "Assertion on 'ps$class[[budget_id]]' failed: Must be element of set {'ParamInt','ParamDbl'}, but is 'ParamFct'", 
-    fixed = TRUE)
+  expect_error(tuner$optimize(instance), regexp = "ParamFct")
 
   # two budget parameters
   search_space = ps(
@@ -124,6 +121,5 @@ test_that("TunerHyperband throws an error if budget parameter is invalid", {
     search_space = search_space)
 
   tuner = tnr("hyperband", eta = 2L)
-  expect_error(tuner$optimize(instance), 
-    regexp = "Exactly one hyperparameter must be tagged with 'budget'", fixed = TRUE)
+  expect_error(tuner$optimize(instance), regexp = "Exactly one hyperparameter must be tagged with 'budget'")
 })

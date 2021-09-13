@@ -1,3 +1,8 @@
+# mlr3hyperband 0.2.0
+
+- Adds `OptimizerHyperband`.
+- Adds `OptimizerSuccessiveHalving`.
+
 # mlr3hyperband 0.1.2
 
 * Internal changes only.
