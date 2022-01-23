@@ -12,7 +12,7 @@
 #'
 #' To identify the budget, the user has to specify explicitly which parameter of
 #' the objective function influences the budget by tagging a single parameter in
-#' the search_space ([paradox::ParamSet]) with `"budget"`.
+#' the search space ([paradox::ParamSet]) with `"budget"`.
 #'
 #' @section Parameters:
 #' \describe{
@@ -22,11 +22,17 @@
 #' With every stage, the point budget is increased by a factor of `eta`
 #' and only the best `1/eta` points are used for the next stage.
 #' Non-integer values are supported, but `eta` is not allowed to be less or
-#' equal 1.}
+#' equal 1.
+#' }
 #' \item{`sampler`}{[paradox::Sampler]\cr
 #' Object defining how the samples of the parameter space should be drawn during
-#' the initialization of each bracket. The default is uniform sampling.}
+#' the initialization of each bracket. The default is uniform sampling.
 #' }
+#' \item{`repeats`}{`logical(1)`\cr
+#' If `FALSE` (default), successive halving terminates once all stages are
+#' evaluated. Otherwise, successive halving starts over again once the last
+#' stage is evaluated.
+#' }}
 #'
 #' @section Archive:
 #' The [bbotk::Archive] holds the following additional column that is specific
@@ -55,21 +61,8 @@
 #' )
 #'
 #' # modified branin function
-#' objective = ObjectiveRFunDt$new(
-#'   fun = function(xdt) {
-#'     a = 1
-#'     b = 5.1 / (4 * (pi ^ 2))
-#'     c = 5 / pi
-#'     r = 6
-#'     s = 10
-#'     t = 1 / (8 * pi)
-#'     data.table(y =
-#'       (a * ((xdt[["x2"]] -
-#'       b * (xdt[["x1"]] ^ 2L) +
-#'       c * xdt[["x1"]] - r) ^ 2) +
-#'       ((s * (1 - t)) * cos(xdt[["x1"]])) +
-#'       s - (5 * xdt[["fidelity"]] * xdt[["x1"]])))
-#'   },
+#' objective = ObjectiveRFun$new(
+#'   fun = branin,
 #'   domain = domain,
 #'   codomain = ps(y = p_dbl(tags = "minimize"))
 #' )
@@ -100,15 +93,16 @@ OptimizerSuccessiveHalving = R6Class("OptimizerSuccessiveHalving",
       param_set = ps(
         n       = p_int(lower = 1, default = 16),
         eta     = p_dbl(lower = 1.0001, default = 2),
-        sampler = p_uty(custom_check = function(x) check_r6(x, "Sampler", null.ok = TRUE))
+        sampler = p_uty(custom_check = function(x) check_r6(x, "Sampler", null.ok = TRUE)),
+        repeats = p_lgl(default = FALSE)
       )
-      param_set$values = list(n = 16L, eta = 2L, sampler = NULL)
+      param_set$values = list(n = 16L, eta = 2L, sampler = NULL, repeats = FALSE)
 
       super$initialize(
         param_classes = c("ParamLgl", "ParamInt", "ParamDbl", "ParamFct"),
         param_set = param_set,
         properties = c("dependencies", "single-crit", "multi-crit"),
-        packages = "emoa"
+        packages = c("mlr3hyperband", "emoa")
       )
     }
   ),
@@ -150,38 +144,46 @@ OptimizerSuccessiveHalving = R6Class("OptimizerSuccessiveHalving",
 
       # number of stages if each configuration in the first stage uses the minimum budget
       # and each configuration in the last stage uses no more than maximum budget
-      k_n = floor(log(r, eta))
+      sr = floor(log(r, eta))
 
       # reduce number of stages if n < r_max so that
       # the last stages evaluates at least one configuration
-      k_r = floor(log(n, eta))
+      sn = floor(log(n, eta))
 
-      # k + 1 is the number of stages
-      k = min(k_n, k_r)
+      # s_max + 1 is the number of stages
+      s_max = min(sr, sn)
 
-      for (i in 0:k) {
-        ni = floor(n * eta^(-i)) # number of configurations in stage
-        ri = r_min * eta^i # resources of each configuration in stage
+      repeat({
+        # iterate stages
+        for (i in 0:s_max) {
+          # number of configurations in stage
+          ni = floor(n * eta^(-i))
+          # budget of a single configuration in stage
+          ri = r_min * eta^i
 
-        if (i == 0) {
-          xdt = sampler$sample(ni)$data
-        } else {
-          archive = inst$archive
-          data = archive$data[batch_nr %in% archive$n_batch]
-          y = data[, archive$cols_y, with = FALSE]
-          minimize = !as.logical(mult_max_to_min(archive$codomain))
+          if (search_space$class[[budget_id]] == "ParamInt") ri = round(ri)
 
-          if (archive$codomain$length == 1) {
-            row_ids = head(order(unlist(y), decreasing = minimize), ni)
+          if (i == 0) {
+            xdt = sampler$sample(ni)$data
           } else {
-            row_ids = nds_selection(points = t(as.matrix(y)), n_select = ni, minimize = minimize)
+            # get performances of previous stage
+            archive = inst$archive
+
+            xdt = if (archive$codomain$length == 1) {
+              archive$best(batch = archive$n_batch, n_select = ni)
+            } else {
+              archive$nds_selection(batch = archive$n_batch, n_select = ni)
+            }
+            xdt = xdt[, archive$cols_x, with = FALSE]
           }
-          xdt = data[row_ids, archive$cols_x, with = FALSE]
+          # increase budget and stage
+          set(xdt, j = budget_id, value = ri)
+          set(xdt, j = "stage", value = i)
+
+          inst$eval_batch(xdt)
         }
-        set(xdt, j = budget_id, value = ri)
-        set(xdt, j = "stage", value = i)
-        inst$eval_batch(xdt)
-      }
+        if (!pars$repeats) break
+      })
     }
   )
 )

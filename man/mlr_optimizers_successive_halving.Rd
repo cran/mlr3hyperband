@@ -20,7 +20,7 @@ budget is reached (upper bound of the \code{budget} parameter).
 
 To identify the budget, the user has to specify explicitly which parameter of
 the objective function influences the budget by tagging a single parameter in
-the search_space (\link[paradox:ParamSet]{paradox::ParamSet}) with \code{"budget"}.
+the search space (\link[paradox:ParamSet]{paradox::ParamSet}) with \code{"budget"}.
 }
 \section{Parameters}{
 
@@ -31,11 +31,17 @@ Number of points in first stage.}
 With every stage, the point budget is increased by a factor of \code{eta}
 and only the best \code{1/eta} points are used for the next stage.
 Non-integer values are supported, but \code{eta} is not allowed to be less or
-equal 1.}
+equal 1.
+}
 \item{\code{sampler}}{\link[paradox:Sampler]{paradox::Sampler}\cr
 Object defining how the samples of the parameter space should be drawn during
-the initialization of each bracket. The default is uniform sampling.}
+the initialization of each bracket. The default is uniform sampling.
 }
+\item{\code{repeats}}{\code{logical(1)}\cr
+If \code{FALSE} (default), successive halving terminates once all stages are
+evaluated. Otherwise, successive halving starts over again once the last
+stage is evaluated.
+}}
 }
 
 \section{Archive}{
@@ -109,21 +115,8 @@ search_space = domain = ps(
 )
 
 # modified branin function
-objective = ObjectiveRFunDt$new(
-  fun = function(xdt) {
-    a = 1
-    b = 5.1 / (4 * (pi ^ 2))
-    c = 5 / pi
-    r = 6
-    s = 10
-    t = 1 / (8 * pi)
-    data.table(y =
-      (a * ((xdt[["x2"]] -
-      b * (xdt[["x1"]] ^ 2L) +
-      c * xdt[["x1"]] - r) ^ 2) +
-      ((s * (1 - t)) * cos(xdt[["x1"]])) +
-      s - (5 * xdt[["fidelity"]] * xdt[["x1"]])))
-  },
+objective = ObjectiveRFun$new(
+  fun = branin,
   domain = domain,
   codomain = ps(y = p_dbl(tags = "minimize"))
 )
