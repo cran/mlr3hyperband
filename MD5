@@ -1,10 +1,10 @@
-590598e865a7fdf42465668ae754e2a2 *DESCRIPTION
+eb3d65242e27130e1d6fd0456c0ba215 *DESCRIPTION
 aadaad9af2829218f3c88b19aa01fd45 *NAMESPACE
-565abf31f933949c90f9b8e5253ee614 *NEWS.md
-85af41512de7efb016e964889c3c732b *R/OptimizerHyperband.R
-4e9d004fd3afc3a121d9c225a342efdb *R/OptimizerSuccessiveHalving.R
-7e0b312e6df428f283ff6240019d7988 *R/TunerHyperband.R
-a59a1f9d3b52666e6918bf374214d2e3 *R/TunerSuccessiveHalving.R
+60b86cf6726c5110260eb97884155407 *NEWS.md
+3e45dd9ad6c8a8329b2293365669d3d7 *R/OptimizerHyperband.R
+ced6375a56719207f4992aea21c190bd *R/OptimizerSuccessiveHalving.R
+e2b9857790b0dc2412e8bb1e66b2145f *R/TunerHyperband.R
+6ee8f2693ac858faa0e1f1ac6b1f5925 *R/TunerSuccessiveHalving.R
 bb7321fbe7a1ec6605300a0b4aeba4ee *R/bibentries.R
 9d5ee229e4c314e72780e6ef5ce65280 *R/helper.R
 56a52e323de7edefb80debf9bef4efca *R/zzz.R
@@ -21,6 +21,6 @@ de5833664954984e339f805bd8d50cf4 *man/mlr_tuners_hyperband.Rd
 c51317cc2c479b087112a3bd4767cecd *tests/testthat/helper.R
 11107059585b8c82d8f689af2197d3b1 *tests/testthat/setup.R
 105126390a15c454f7604b737326aa51 *tests/testthat/teardown.R
-0741f7f46b86d10bd150cff181e5f326 *tests/testthat/test_TunerHyperband.R
-ed02fc073f704900738673849300351d *tests/testthat/test_TunerSuccessiveHalving.R
+20068afd5dc48389cfbf1ea6b4c888be *tests/testthat/test_TunerHyperband.R
+08f2bfb9d3febcd4feb2bb80fa78b3fd *tests/testthat/test_TunerSuccessiveHalving.R
 1326b8d53ffe31641b1cd56e920ede69 *tests/testthat/test_nds_selection.R
