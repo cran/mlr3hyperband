@@ -1,6 +1,6 @@
-eb3d65242e27130e1d6fd0456c0ba215 *DESCRIPTION
+11fb8f5559224901981ebb735ecb8beb *DESCRIPTION
 aadaad9af2829218f3c88b19aa01fd45 *NAMESPACE
-60b86cf6726c5110260eb97884155407 *NEWS.md
+7e14c82b270a0239dd1d7a7025e897a2 *NEWS.md
 3e45dd9ad6c8a8329b2293365669d3d7 *R/OptimizerHyperband.R
 ced6375a56719207f4992aea21c190bd *R/OptimizerSuccessiveHalving.R
 e2b9857790b0dc2412e8bb1e66b2145f *R/TunerHyperband.R
@@ -12,11 +12,11 @@ bb7321fbe7a1ec6605300a0b4aeba4ee *R/bibentries.R
 59023bad99e521b33f5ad09fe52ced21 *man/hyperband_budget.Rd
 5c004e25ff197ae7aa53e0e5888a7c72 *man/hyperband_n_configs.Rd
 dbbaa8fc22b30044ea6e4465b44a6c28 *man/hyperband_schedule.Rd
-9f80738f32e5d115ca08b2b3539fb517 *man/mlr3hyperband-package.Rd
-ada7e8a52edc3b443a05dc9bc773535d *man/mlr_optimizers_hyperband.Rd
-41562a46caf551b1509367868c0be84f *man/mlr_optimizers_successive_halving.Rd
-de5833664954984e339f805bd8d50cf4 *man/mlr_tuners_hyperband.Rd
-99c27b9d289ba086991312020f865449 *man/mlr_tuners_successive_halving.Rd
+beacf7fa5259385a354e0f4a94669ae5 *man/mlr3hyperband-package.Rd
+544922834e5f1e7f161d7005b9a78c93 *man/mlr_optimizers_hyperband.Rd
+f784b3d1d51a4940b507f6d68a9ef1a4 *man/mlr_optimizers_successive_halving.Rd
+da3b5a24c3d5be46bea6855fb0c72fbe *man/mlr_tuners_hyperband.Rd
+3142ac2c1022e69df7594809a95ee806 *man/mlr_tuners_successive_halving.Rd
 2a199a031678a3916e0df4dd41eb4625 *tests/testthat.R
 c51317cc2c479b087112a3bd4767cecd *tests/testthat/helper.R
 11107059585b8c82d8f689af2197d3b1 *tests/testthat/setup.R
