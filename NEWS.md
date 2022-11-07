@@ -1,3 +1,7 @@
+# mlr3hyperband 0.4.3
+
+* docs: Examples use `branin_wu()` function now.
+
 # mlr3hyperband 0.4.2
 
 * docs: Re-generate rd files with valid html.

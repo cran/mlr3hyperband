@@ -1,6 +1,6 @@
 Package: mlr3hyperband
 Title: Hyperband for 'mlr3'
-Version: 0.4.2
+Version: 0.4.3
 Authors@R: 
     c(person(given = "Marc",
              family = "Becker",
@@ -38,7 +38,7 @@ URL: https://mlr3hyperband.mlr-org.com,
         https://github.com/mlr-org/mlr3hyperband
 BugReports: https://github.com/mlr-org/mlr3hyperband/issues
 Depends: mlr3tuning (>= 0.13.0), R (>= 3.1.0)
-Imports: bbotk (>= 0.5.2), checkmate (>= 1.9.4), data.table, lgr, mlr3
+Imports: bbotk (>= 0.7.0), checkmate (>= 1.9.4), data.table, lgr, mlr3
         (>= 0.13.1), mlr3misc (>= 0.10.0), paradox (>= 0.9.0), R6
 Suggests: emoa, mlr3learners (>= 0.5.2), mlr3pipelines, rpart, testthat
         (>= 3.0.0), xgboost
@@ -50,7 +50,7 @@ RoxygenNote: 7.2.1
 Collate: 'TunerHyperband.R' 'TunerSuccessiveHalving.R'
         'OptimizerHyperband.R' 'OptimizerSuccessiveHalving.R'
         'bibentries.R' 'helper.R' 'zzz.R'
-Packaged: 2022-08-25 10:40:58 UTC; marc
+Packaged: 2022-11-04 21:21:21 UTC; marc
 Author: Marc Becker [aut, cre] (<https://orcid.org/0000-0002-8115-0400>),
   Sebastian Gruber [aut] (<https://orcid.org/0000-0002-8544-3470>),
   Jakob Richter [aut] (<https://orcid.org/0000-0003-4481-5554>),
@@ -58,4 +58,4 @@ Author: Marc Becker [aut, cre] (<https://orcid.org/0000-0002-8115-0400>),
   Bernd Bischl [aut] (<https://orcid.org/0000-0001-6002-6980>)
 Maintainer: Marc Becker <marcbecker@posteo.de>
 Repository: CRAN
-Date/Publication: 2022-08-25 11:20:10 UTC
+Date/Publication: 2022-11-07 10:00:02 UTC
