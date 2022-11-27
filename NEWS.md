@@ -1,3 +1,7 @@
+# mlr3hyperband 0.4.4
+
+* fix: Remove `emoa` from required packages of `OptimizerSuccessiveHalving`.
+
 # mlr3hyperband 0.4.3
 
 * docs: Examples use `branin_wu()` function now.
