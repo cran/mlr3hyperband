@@ -1,3 +1,9 @@
+# mlr3hyperband 0.4.5
+
+* fix: Unloading `mlr3hyperband` removes optimizers and tuners from the dictionaries.
+* docs: Update resources and descriptions.
+* tests: Remove deprecated `method` argument of `mlr3tuning::tune()`.
+
 # mlr3hyperband 0.4.4
 
 * fix: Remove `emoa` from required packages of `OptimizerSuccessiveHalving`.

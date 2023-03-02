@@ -1,6 +1,6 @@
 Package: mlr3hyperband
 Title: Hyperband for 'mlr3'
-Version: 0.4.4
+Version: 0.4.5
 Authors@R: c(
     person("Marc", "Becker", , "marcbecker@posteo.de", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-8115-0400")),
@@ -13,12 +13,13 @@ Authors@R: c(
     person("Bernd", "Bischl", , "bernd_bischl@gmx.net", role = "aut",
            comment = c(ORCID = "0000-0001-6002-6980"))
   )
-Description: Implements hyperband method for hyperparameter tuning.
-    Various termination criteria can be set and combined. The class
-    'AutoTuner' provides a convenient way to perform nested resampling in
-    combination with 'mlr3'. The hyperband algorithm was proposed by Lisha
-    Li, Kevin Jamieson, Giulia DeSalvo, Afshin Rostamizadeh and Ameet
-    Talwalkar (2018) <arXiv:1603.06560>.
+Description: Successive Halving (Jamieson and Talwalkar (2016)
+    <arXiv:1502.07943>) and Hyperband (Li et al. 2018 <arXiv:1603.06560>)
+    optimization algorithm for the mlr3 ecosystem. The implementation in
+    mlr3hyperband features improved scheduling and parallelizes the evaluation
+    of configurations. The package includes tuners for hyperparameter
+    optimization in mlr3tuning and optimizers for black-box optimization in
+    bbotk.
 License: LGPL-3
 URL: https://mlr3hyperband.mlr-org.com,
         https://github.com/mlr-org/mlr3hyperband
@@ -32,11 +33,11 @@ Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
 NeedsCompilation: no
-RoxygenNote: 7.2.2
-Collate: 'TunerHyperband.R' 'TunerSuccessiveHalving.R'
-        'OptimizerHyperband.R' 'OptimizerSuccessiveHalving.R'
-        'bibentries.R' 'helper.R' 'zzz.R'
-Packaged: 2022-11-27 11:39:08 UTC; marc
+RoxygenNote: 7.2.3
+Collate: 'aaa.R' 'OptimizerSuccessiveHalving.R' 'OptimizerHyperband.R'
+        'TunerHyperband.R' 'TunerSuccessiveHalving.R' 'bibentries.R'
+        'helper.R' 'zzz.R'
+Packaged: 2023-03-02 10:49:48 UTC; marc
 Author: Marc Becker [aut, cre] (<https://orcid.org/0000-0002-8115-0400>),
   Sebastian Gruber [aut] (<https://orcid.org/0000-0002-8544-3470>),
   Jakob Richter [aut] (<https://orcid.org/0000-0003-4481-5554>),
@@ -44,4 +45,4 @@ Author: Marc Becker [aut, cre] (<https://orcid.org/0000-0002-8115-0400>),
   Bernd Bischl [aut] (<https://orcid.org/0000-0001-6002-6980>)
 Maintainer: Marc Becker <marcbecker@posteo.de>
 Repository: CRAN
-Date/Publication: 2022-11-27 12:00:02 UTC
+Date/Publication: 2023-03-02 13:00:02 UTC
