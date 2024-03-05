@@ -1,7 +1,7 @@
-48bfcde0de1384cb803814b3e00feee4 *DESCRIPTION
+817a7c96b5c9e3a86a3987b279b5b466 *DESCRIPTION
 aadaad9af2829218f3c88b19aa01fd45 *NAMESPACE
-8824d40157305126b61a7b04c5937f2d *NEWS.md
-d778850a7156b1d9b2b417eaa2afd2b6 *R/OptimizerHyperband.R
+50d729688fe921062e32abaaf46a5117 *NEWS.md
+75d33ab542930a0b02bb990f38518e4d *R/OptimizerHyperband.R
 0d049b8a7fe5e120417474969e5397e0 *R/OptimizerSuccessiveHalving.R
 f9116cb79f90d846006f1eae65ef4189 *R/TunerHyperband.R
 a6c2307faf35ab7055a4a8547c0668e9 *R/TunerSuccessiveHalving.R
@@ -23,6 +23,6 @@ d6dcc6e31db4696b176ded37e2059dd1 *man/mlr_tuners_successive_halving.Rd
 f027cf5725cb1dd4bd9a44c70e3ec803 *tests/testthat/helper.R
 11107059585b8c82d8f689af2197d3b1 *tests/testthat/setup.R
 105126390a15c454f7604b737326aa51 *tests/testthat/teardown.R
-384136b6c18e7458f614c01d37437382 *tests/testthat/test_TunerHyperband.R
-2e3720bbf6b778cae0dbe440790eb976 *tests/testthat/test_TunerSuccessiveHalving.R
+90d215cbf378562e08f7aa6b762624a4 *tests/testthat/test_TunerHyperband.R
+6007f7da640f6e3e789735fc40ba874b *tests/testthat/test_TunerSuccessiveHalving.R
 1326b8d53ffe31641b1cd56e920ede69 *tests/testthat/test_nds_selection.R

@@ -1,3 +1,7 @@
+# mlr3hyperband 0.5.0
+
+* compatibility: Work with new paradox version 1.0.0
+
 # mlr3hyperband 0.4.5
 
 * fix: Unloading `mlr3hyperband` removes optimizers and tuners from the dictionaries.

@@ -1,6 +1,6 @@
 Package: mlr3hyperband
 Title: Hyperband for 'mlr3'
-Version: 0.4.5
+Version: 0.5.0
 Authors@R: c(
     person("Marc", "Becker", , "marcbecker@posteo.de", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-8115-0400")),
@@ -33,11 +33,11 @@ Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
 NeedsCompilation: no
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Collate: 'aaa.R' 'OptimizerSuccessiveHalving.R' 'OptimizerHyperband.R'
         'TunerHyperband.R' 'TunerSuccessiveHalving.R' 'bibentries.R'
         'helper.R' 'zzz.R'
-Packaged: 2023-03-02 10:49:48 UTC; marc
+Packaged: 2024-03-04 15:45:03 UTC; marc
 Author: Marc Becker [aut, cre] (<https://orcid.org/0000-0002-8115-0400>),
   Sebastian Gruber [aut] (<https://orcid.org/0000-0002-8544-3470>),
   Jakob Richter [aut] (<https://orcid.org/0000-0003-4481-5554>),
@@ -45,4 +45,4 @@ Author: Marc Becker [aut, cre] (<https://orcid.org/0000-0002-8115-0400>),
   Bernd Bischl [aut] (<https://orcid.org/0000-0001-6002-6980>)
 Maintainer: Marc Becker <marcbecker@posteo.de>
 Repository: CRAN
-Date/Publication: 2023-03-02 13:00:02 UTC
+Date/Publication: 2024-03-05 05:30:19 UTC
