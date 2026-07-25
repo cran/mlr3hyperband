@@ -81,7 +81,7 @@ We use the `tune()` function to run the optimization.
 ``` r
 instance = tune(
   tnr("hyperband", eta = 3),
-  task = tsk("pima"),
+  task = tsk("sonar"),
   learner = learner,
   resampling = rsmp("cv", folds = 3),
   measures = msr("classif.ce")
@@ -99,7 +99,7 @@ instance$result
     ## 3 variables not shown: [learner_param_vals, x_domain, classif.ce]
 
 The archive contains all evaluated hyperparameter configurations.
-Hyperband adds the `"stage"` and `"braket"`.
+Hyperband adds the `"stage"` and `"bracket"`.
 
 ``` r
 as.data.table(instance$archive)[, .(stage, bracket, classif.ce, nrounds)]

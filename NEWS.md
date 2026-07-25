@@ -1,3 +1,9 @@
+# mlr3hyperband 1.1.1
+
+* refactor: Minimum required version of `rush` is now 1.0.0.
+  Removed all compatibility workarounds for older versions.
+* compatibility: mlr3 1.7.2
+
 # mlr3hyperband 1.1.0
 
 * feat: The mlr3 ecosystem has a base logger now which is named `mlr3`.
